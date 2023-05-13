@@ -1,0 +1,47 @@
+<!-- template driven porque é um formulário simples-->
+<form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <div class="container">
+    <label for="table">Mesa</label>
+    <input
+      class="input--mesa"
+      type="text"
+      name="table"
+      value="{{ tableNum }}"
+      readonly
+    />
+  </div>
+  <div class="container">
+    <label for="name">Nome</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      placeholder="Informe o seu nome"
+      [(ngModel)]="formData.name"
+      required
+    />
+  </div>
+  <div class="container">
+    <label for="cpf">CPF</label>
+    <input
+      type="text"
+      name="cpf"
+      id="cpf"
+      [(ngModel)]="formData.cpf"
+      (input)="formatCpf()"
+      placeholder="Informe o seu CPF"
+      minlength="14"
+      maxlength="14"
+      required
+      pattern="[0-9.-]*"
+    />
+  </div>
+  <button
+    type="submit"
+    [disabled]="myForm.invalid"
+    [ngClass]="myForm.invalid ? 'disabled' : ''"
+    [title]="myForm.invalid ? 'Preencha os campos para logar' : ''"
+  >
+    Entrar
+  </button>
+</form>
